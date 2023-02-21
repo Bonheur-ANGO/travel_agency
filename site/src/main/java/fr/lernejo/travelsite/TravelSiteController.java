@@ -18,7 +18,7 @@ public class TravelSiteController {
     }
 
     @PostMapping("/api/inscription")
-    public String inscription(@ModelAttribute UserEntity user, Model model) throws JsonProcessingException {
+    public String inscription(@ModelAttribute User user, Model model) throws JsonProcessingException {
         model.addAttribute("user", user);
         userList.addUser(user);
         System.out.println(userList.getUserList());

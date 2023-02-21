@@ -7,13 +7,13 @@ import java.util.List;
 
 @Component
 public class UserRepository {
-    private final List<UserEntity> userList = new ArrayList<>();
+    private final List<User> userList = new ArrayList<>();
 
-    public void addUser(UserEntity user){
+    public void addUser(User user){
         userList.add(user);
     }
 
-    public List<UserEntity> getUserList(){
+    public List<User> getUserList(){
         return userList;
     }
 
