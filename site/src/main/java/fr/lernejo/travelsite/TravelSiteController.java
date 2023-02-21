@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class TravelSiteController {
 
@@ -27,12 +30,12 @@ public class TravelSiteController {
 
     @GetMapping("/api/travels")
     public String getTravels(@RequestParam("userName") String userName) throws JsonProcessingException {
-        Destination destination1 = new Destination("Caribbean", 32.4);
-        Destination destination =new Destination("Australia", 35.1);
-        DestinationList destinationList = new DestinationList();
-        destinationList.addDestination(destination);
-        destinationList.addDestination(destination1);
-        System.out.println(destinationList.getDestinationList());
+        Destination destination1 = new Destination("a country", 3.25);
+        Destination destination =new Destination("another country", 7.52);
+        List<Destination> destinationList = new ArrayList<>();
+        destinationList.add(destination);
+        destinationList.add(destination1);
+        System.out.println(destinationList);
         return objectMapper.writeValueAsString(destinationList);
 
     }
