@@ -6,14 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-
 @RestController
 public class TravelSiteController {
 
-    UserRepository userList = new UserRepository();
+    private final UserRepository userList;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final ObjectMapper objectMapper2 = new ObjectMapper();
 
@@ -22,7 +18,7 @@ public class TravelSiteController {
     }
 
     @PostMapping("/api/inscription")
-    public String inscription(@ModelAttribute User user, Model model) throws JsonProcessingException {
+    public String inscription(@ModelAttribute UserEntity user, Model model) throws JsonProcessingException {
         model.addAttribute("user", user);
         userList.addUser(user);
         System.out.println(userList.getUserList());
@@ -37,7 +33,9 @@ public class TravelSiteController {
         destinationList.addDestination(destination);
         destinationList.addDestination(destination1);
         System.out.println(destinationList.getDestinationList());
-        return objectMapper2.writeValueAsString(destinationList);
+        return objectMapper.writeValueAsString(destinationList);
 
     }
+
+
 }
