@@ -18,14 +18,14 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="userEmail" class="form-label">Adresse email</label>
-                        <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp">
+                        <input type="email" name="userEmail" class="form-control" id="userEmail" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">Votre adresse email ne sera jamais donnée à quelqu'un
                             d'autre.
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="userName" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="userName">
+                        <input type="text" name="userName" class="form-control" id="userName">
                     </div>
                     <div class="mb-3">
                         <label for="userCountry" class="form-label">Pays dans lequel vous habitez</label>
@@ -130,7 +130,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    function submitForm() {
+    /*function submitForm() {
         var formData = {};
         var form = document.getElementById("inscription");
         Array.prototype.forEach.call(form.elements,
@@ -153,7 +153,7 @@
     document.getElementById('inscription').onsubmit = function() {
         submitForm();
         return false;
-    };
+    };*/
 
 </script>
 </body>

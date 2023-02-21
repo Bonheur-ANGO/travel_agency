@@ -53,6 +53,11 @@
                 <optional>true</optional>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jdbc</artifactId>
+            </dependency>
+
             <!-- Test dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -83,6 +88,8 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
+
+
     </dependencies>
 
     <build>
