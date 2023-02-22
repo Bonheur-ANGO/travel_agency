@@ -3,6 +3,7 @@ package fr.lernejo.travelsite;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +21,15 @@ public class TravelSiteController {
         this.userList = userList;
     }
 
+   /* @GetMapping("/api/inscription")
+    public String inscriptionPage(){
+        return "index";
+    }*/
+
     @PostMapping("/api/inscription")
-    public String inscription(@ModelAttribute User user, Model model) throws JsonProcessingException {
-        model.addAttribute("user", user);
+        public ResponseEntity<String> inscription(@RequestBody User user) {
         userList.addUser(user);
-        System.out.println(userList.getUserList());
-        return objectMapper.writeValueAsString(user);
+        return ResponseEntity.ok("Créé avec succès");
     }
 
     @GetMapping("/api/travels")
