@@ -24,15 +24,15 @@ public class PingController {
     }
 
     @GetMapping("/api/temperature")
-    public ResponseEntity<String> getCountryTemperatures(@RequestParam("country") String country, @RequestBody CountryTemperature countryTemperature1) throws JsonProcessingException {
-        /*Temperature temperature = new Temperature("2022-12-04", temperatureService.getTemperature(country));
+    public ResponseEntity<String> getCountryTemperatures(@RequestParam("country") String country) throws JsonProcessingException {
+        Temperature temperature = new Temperature("2022-12-04", temperatureService.getTemperature(country));
         Temperature temperature1 = new Temperature("2022-12-03", temperatureService.getTemperature(country));
         List<Temperature> temperatureList = new ArrayList<>();
         temperatureList.add(temperature);
         temperatureList.add(temperature1);
         CountryTemperature countryTemperature1 = new CountryTemperature(country, temperatureList);
         System.out.println(countryTemperature1);
-        System.out.println(country);*/
+        System.out.println(country);
         return ResponseEntity.ok(mapper.writeValueAsString(countryTemperature1));
     }
 }
