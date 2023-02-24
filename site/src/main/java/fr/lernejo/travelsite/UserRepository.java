@@ -17,4 +17,11 @@ public class UserRepository {
         return userList;
     }
 
+    public User getUser(String name){
+        return userList.stream()
+            .filter(user -> user.userName().equals(name))
+            .findFirst()
+            .orElse(null);
+    }
+
 }
