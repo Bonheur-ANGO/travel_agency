@@ -19,7 +19,6 @@ public class Requester {
     public Requester(PredictionEngineClient predictionEngineClient) {
         this.predictionEngineClient = predictionEngineClient;
     }
-
     public List<String> loadCountries() throws IOException {
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("countries.txt");
         String content = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
@@ -29,12 +28,8 @@ public class Requester {
     }
 
     public List<Destination> getAllCountryTemperatureAndconvertJsonResponseToObject() throws IOException {
-        List<String> countries = this.loadCountries();
-
         List<Destination> destinationList = new ArrayList<>();
-
-
-        for (String country: countries){
+        for (String country: this.loadCountries()){
             Call<String> call = predictionEngineClient.getTemperature(country);
             Response<String> response = call.execute();
             ObjectMapper objectMapper = new ObjectMapper();
@@ -45,8 +40,7 @@ public class Requester {
                     sum += temperatureWithDate.temperature();
                 }
             }
-           Destination destination = new Destination(country, sum/countryTemperature.temperatures().size());
-            destinationList.add(destination);
+            destinationList.add(new Destination(country, sum/countryTemperature.temperatures().size()));
         }
         return destinationList;
     }
@@ -59,12 +53,10 @@ public class Requester {
         for (Destination destination : destinationList){
             if (weatherExpectation.equals("COLDER") && !destination.country().equals(country)){
                 if (destination.temperature() < minimumTemperatureDistance){
-                    System.out.println(destination);
                     filterList.add(destination);
                 }
             } else if (weatherExpectation.equals("WARMER") && !destination.country().equals(country)) {
                 if (destination.temperature() > minimumTemperatureDistance){
-                    System.out.println(destination);
                     filterList.add(destination);
                 }
             }
