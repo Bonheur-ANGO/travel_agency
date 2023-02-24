@@ -38,20 +38,26 @@ public class TravelSiteController {
         return ResponseEntity.ok("Créé avec succès");
     }
 
-    @GetMapping("/api/travels")
-    public String getTravels(@RequestParam("userName") String userName) throws IOException {
+    public List<Destination> defaultDestinationList(){
+        List<Destination> destinations = new ArrayList<>();
         Destination destination1 = new Destination("a country", 3.25);
         Destination destination =new Destination("another country", 7.52);
+        destinations.add(destination);
+        destinations.add(destination1);
+        return destinations;
+    }
+
+    @GetMapping("/api/travels")
+    public ResponseEntity<String> getTravels(@RequestParam(name="userName") String userName) throws IOException {
+
         Requester requester = new Requester(predictionEngineClient);
         User user = userList.getUser(userName);
         if (user != null){
             List<Destination> destinationList = requester.travelProposition(user.userCountry(), user.weatherExpectation(), user.minimumTemperatureDistance());
-            destinationList.add(destination);
-            destinationList.add(destination1);
             System.out.println(requester.travelProposition(user.userCountry(), user.weatherExpectation(), user.minimumTemperatureDistance()));
-            return objectMapper.writeValueAsString(destinationList);
+            return ResponseEntity.ok(objectMapper.writeValueAsString(destinationList));
         } else {
-            return "l'utilisateur n'existe pas";
+            return ResponseEntity.ok(objectMapper.writeValueAsString(this.defaultDestinationList()));
         }
     }
 
