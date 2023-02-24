@@ -39,16 +39,20 @@ public class TravelSiteController {
     }
 
     @GetMapping("/api/travels")
-    public String getTravels(@RequestParam("userName") String userName, Requester requester) throws IOException {
+    public String getTravels(@RequestParam("userName") String userName) throws IOException {
         Destination destination1 = new Destination("a country", 3.25);
         Destination destination =new Destination("another country", 7.52);
-         requester = new Requester(predictionEngineClient);
+        Requester requester = new Requester(predictionEngineClient);
         User user = userList.getUser(userName);
-        List<Destination> destinationList = requester.travelProposition(user.userCountry(), user.weatherExpectation(), user.minimumTemperatureDistance());
-        destinationList.add(destination);
-        destinationList.add(destination1);
-        System.out.println(requester.travelProposition(user.userCountry(), user.weatherExpectation(), user.minimumTemperatureDistance()));
-        return objectMapper.writeValueAsString(destinationList);
+        if (user != null){
+            List<Destination> destinationList = requester.travelProposition(user.userCountry(), user.weatherExpectation(), user.minimumTemperatureDistance());
+            destinationList.add(destination);
+            destinationList.add(destination1);
+            System.out.println(requester.travelProposition(user.userCountry(), user.weatherExpectation(), user.minimumTemperatureDistance()));
+            return objectMapper.writeValueAsString(destinationList);
+        } else {
+            return "l'utilisateur n'existe pas";
+        }
     }
 
 

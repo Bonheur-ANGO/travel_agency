@@ -18,10 +18,13 @@ public class UserRepository {
     }
 
     public User getUser(String name){
-        return userList.stream()
-            .filter(user -> user.userName().equals(name))
-            .findFirst()
-            .orElse(null);
+        if (userList.size() != 0){
+            return userList.stream()
+                .filter(user -> user.userName().equals(name))
+                .findFirst()
+                .orElse(null);
+        }
+        return null;
     }
 
 }
