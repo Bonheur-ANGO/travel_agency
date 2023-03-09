@@ -49,7 +49,6 @@ public class TravelSiteController {
 
     @GetMapping("/api/travels")
     public ResponseEntity<String> getTravels(@RequestParam(name="userName") String userName) throws IOException {
-
         Requester requester = new Requester(predictionEngineClient);
         User user = userList.getUser(userName);
         if (user != null){
